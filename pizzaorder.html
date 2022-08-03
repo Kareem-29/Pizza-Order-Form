@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+<body>
+<h1>Pizza Order Form</h1>
+    <form name="order">
+        <table>
+            <tr>
+                <td>Pizza Size</td>
+                <td>
+                    <input type="radio" name="size" value="10">Small
+                    <input type="radio" name="size" value="20">Medium
+                    <input type="radio" name="size" value="30">Large
+                </td>
+            </tr>
+            <tr>
+                <td>Toppings</td>
+                <td>
+                    <input type="checkbox" name="top" value="10">Pepperoni
+                    <input type="checkbox" name="top" value="10">Chicken Tikka
+                    <input type="checkbox" name="top" value="10">Philly Steak
+                    <input type="checkbox" name="top" value="10">Chicken Steak
+                    <br/>
+                    <input type="checkbox" name="top" value="2">Mushrooms
+                    <input type="checkbox" name="top" value="3">Black Olives
+                    <input type="checkbox" name="top" value="5">Jalapeno
+                    <input type="checkbox" name="top" value="5">Relish
+                    <br/>
+                    <input type="checkbox" name="top" value="3">Extra Sauce
+                    <input type="checkbox" name="top" value="6">Extra Spice
+                    <input type="checkbox" name="top" value="10">Thick Crust
+                    <input type="checkbox" name="top" value="2">Super Thin
+                    <br/>
+                    <input type="checkbox" name="top" value="5">Mozarella
+                    <input type="checkbox" name="top" value="6">Swiss
+                    <input type="checkbox" name="top" value="2">Cheddar
+                    <input type="checkbox" name="top" value="1">Labneh
+                    <br/>
+                    <input type="checkbox" name="top" value="4">Italian Seasoning
+                    <input type="checkbox" name="top" value="3">Spanish Seasoning
+                    <input type="checkbox" name="top" value="3">Indian Seasoning
+                    <input type="checkbox" name="top" value="3">Kabsa Seasoning
+                    <br/>                    
+                </td>
+            </tr>
+            <tr>
+                <td>Delivery Option</td>
+                <td>
+                    <select name="delivery">
+                        <option value="0">Pick-up</option>
+                        <option value="5">Delivery - Khaldiyyah</option>
+                        <option value="10">Delivery - Haradh</option>
+                        <option value="15">Delivery - Mahasin</option>
+                        <option value="30">Delivery - Mubarraz</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="button" onclick="Totalprice()" value="Calculate"></td>
+            </tr>
+            <tr>
+              <td colspan="2"><textarea name="output" rows="5" cols="50"></textarea></td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+        function Totalprice()
+        {
+            var Sizes= document.forms[0].size;
+            var Topping= document.forms[0].top;
+            var Delivery_Type=document.forms[0].delivery;
+            var totalDel=Delivery_Type.value;
+            var totalTop=0;
+            var totalSize=0;
+            var totalPrice=0;
+            var Output=document.forms[0].output;
+            var flag="false";
+
+            for(var j=0; j<Topping.length; j++)
+            {
+                if(Topping[j].checked)
+                {
+                    totalTop+=Topping[j].value*1;
+                }
+            }
+
+            for(var i=0; i<Sizes.length; i++)
+            {   
+                if(Sizes[i].checked)
+                {
+                    totalSize=Sizes[i].value*1;
+                    totalPrice = totalSize + totalDel*1 + totalTop;
+                    flag="true";
+                    Output.innerHTML= "Your total order is SAR "+totalPrice+" and it will be delivered to you at "+Delivery_Type.options[Delivery_Type.selectedIndex].text;
+                }
+
+               if(flag=="false")
+                {
+                    Output.innerHTML=" Select the Size ";
+                }
+            }
+
+            
+        }
+    </script>
+    </body>
+</html>
